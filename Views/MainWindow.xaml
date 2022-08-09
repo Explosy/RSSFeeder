@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:RSSFeeder.ViewModels"
         xmlns:local="clr-namespace:RSSFeeder"
         mc:Ignorable="d"
@@ -18,7 +19,13 @@
     </Window.Background>
     <DockPanel>
         <Menu x:Name="menu" Background="{x:Null}" DockPanel.Dock="Top">
-            <MenuItem Header="RSS" FontSize="20" FontFamily="Arial Black" Foreground="LightCyan">
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Solid_Bars" Height="15" Margin="0,0,10,0" Foreground="PowderBlue"></fa:ImageAwesome>
+                        <TextBlock Text="RSS" FontSize="20" FontFamily="Arial Black" Foreground="LightCyan"/>
+                    </StackPanel>
+                </MenuItem.Header> 
                 <MenuItem Header="Channels" FontSize="14" Background="Black"/>
                 <MenuItem Header="Settings" FontSize="14" Background="Black"/>
             </MenuItem>
