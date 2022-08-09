@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RSSFeeder.Models;
+using System;
 
 
 namespace RSSFeeder.ViewModels
@@ -6,7 +7,7 @@ namespace RSSFeeder.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         private string _Title = "RSSFeeder";
-
+        
         public string Title
         {
             get => _Title;

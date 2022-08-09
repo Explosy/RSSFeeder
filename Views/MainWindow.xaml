@@ -10,7 +10,21 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-
-    </Grid>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF0E1C27" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <DockPanel>
+        <Menu x:Name="menu" Background="{x:Null}" DockPanel.Dock="Top">
+            <MenuItem Header="RSS" FontSize="20" FontFamily="Arial Black" Foreground="LightCyan">
+                <MenuItem Header="Channels" FontSize="14" Background="Black"/>
+                <MenuItem Header="Settings" FontSize="14" Background="Black"/>
+            </MenuItem>
+        </Menu>
+        <TabControl Background="{x:Null}">
+            
+        </TabControl>
+    </DockPanel>
 </Window>
