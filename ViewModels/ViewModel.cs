@@ -11,12 +11,12 @@ namespace RSSFeeder.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
 
-        protected virtual bool Set<T>(ref T field, T value, string PropertyName = null)
-        {
-            if (Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(PropertyName);
-            return true;
-        }
+        //protected virtual bool Set<T>(ref T field, T value, string PropertyName = null)
+        //{
+        //    if (Equals(field, value)) return false;
+        //    field = value;
+        //    OnPropertyChanged(PropertyName);
+        //    return true;
+        //}
     }
 }

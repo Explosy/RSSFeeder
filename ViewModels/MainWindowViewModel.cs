@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RSSFeeder.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
-        private string _Title;
+        private string _Title = "RSSFeeder";
 
         public string Title
         {
