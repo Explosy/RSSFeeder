@@ -10,7 +10,7 @@ namespace RSSFeeder.Models
         public string Title;
         public string Description;
         public string Link;
-        public List<RssItem> Items;
+        public IEnumerable<RssItem> Items;
 
         public RssFeed(string url)
         {
@@ -48,7 +48,7 @@ namespace RSSFeeder.Models
                             case "item":
                                 {
                                     RssItem channelItem = new RssItem(channelNode);
-                                    Items.Add(channelItem);
+                                    (Items as List<RssItem>).Add(channelItem);
                                     break;
                                 }
                         }
