@@ -15,10 +15,13 @@ namespace RSSFeeder.ViewModels
         public ObservableCollection<Feed> Feeds { get; }
         public ObservableCollection<Item> Items { get; }
         
+        public string DefaultUrl { get; set; }
         public MainWindowViewModel()
         {
+            DefaultUrl = Properties.Settings.Default.DefaultUrl;
+
             Feeds = new ObservableCollection<Feed>();
-            Feeds.Add(GetFeedByUrl(@"https://habr.com/rss/interesting/"));
+            Feeds.Add(GetFeedByUrl(DefaultUrl));
             Items = new ObservableCollection<Item>(Feeds[0].Items);
             Title = Feeds[0].Title;
 

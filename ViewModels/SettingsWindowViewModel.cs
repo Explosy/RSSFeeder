@@ -12,12 +12,14 @@ namespace RSSFeeder.ViewModels
             {
                 if (Equals(_DefaultUrl, value)) return;
                 _DefaultUrl = value;
+                Properties.Settings.Default.DefaultUrl = value;
+                Properties.Settings.Default.Save();
                 OnPropertyChanged();
             }
         }
         public SettingsWindowViewModel()
         {
-            DefaultUrl = @"https://habr.com/rss/interesting/";
+            DefaultUrl = Properties.Settings.Default.DefaultUrl;
         }
     }
 }
