@@ -1,9 +1,11 @@
 ﻿using RSSFeeder.Models;
+using RSSFeeder.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 using System.Xml;
 
 namespace RSSFeeder.ViewModels
@@ -16,12 +18,29 @@ namespace RSSFeeder.ViewModels
         public MainWindowViewModel()
         {
             Feeds = new ObservableCollection<Feed>();
-            Feeds.Add(GetFeedByUrl("https://habr.com/rss/interesting/"));
+            Feeds.Add(GetFeedByUrl(@"https://habr.com/rss/interesting/"));
             Items = new ObservableCollection<Item>(Feeds[0].Items);
             Title = Feeds[0].Title;
+
+            #region Commands
+
+            OpenSettingsWindowCommand = new ActionCommand(OnOpenSettingsWindowCommandExecuted, CanOpenSettingsWindowCommandExecute);
+            
+            #endregion
         }
 
-        
+        #region Commands
+        #region OpenSettingsWindowCommand
+        public ICommand OpenSettingsWindowCommand { get; }
+        private void OnOpenSettingsWindowCommandExecuted (object p)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Show();
+        }
+        private bool CanOpenSettingsWindowCommandExecute(object p) => true;
+        #endregion
+        #endregion
+
         private string _Title = "RSSFeeder";
         
         public string Title
