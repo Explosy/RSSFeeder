@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace RSSFeeder.ViewModels
@@ -17,7 +18,7 @@ namespace RSSFeeder.ViewModels
             Feeds = new ObservableCollection<Feed>();
             Feeds.Add(GetFeedByUrl("https://habr.com/rss/interesting/"));
             Items = new ObservableCollection<Item>(Feeds[0].Items);
-
+            Title = Feeds[0].Title;
         }
 
         
@@ -87,7 +88,7 @@ namespace RSSFeeder.ViewModels
                                                 }
                                             case "description":
                                                 {
-                                                    item.Description = xmlTag.InnerText;
+                                                    item.Description = Regex.Replace(xmlTag.InnerText, "<.*?>", String.Empty);
                                                     break;
                                                 }
                                             case "pubDate":

@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\RssFeed.cs" />
+    <Compile Remove="Models\RssItem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome5" Version="2.1.11" />
   </ItemGroup>
 

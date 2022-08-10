@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:RSSFeeder.ViewModels"
         xmlns:local="clr-namespace:RSSFeeder"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -31,22 +31,20 @@
                 <MenuItem Header="Settings" FontSize="14" Background="Black"/>
             </MenuItem>
         </Menu>
-        <TabControl Background="{x:Null}">
+        <TabControl Background="{x:Null}" Padding="5,5,5,5">
             <TabItem Header="{Binding Title}" Background="{x:Null}" BorderBrush="{x:Null}">
-                <Grid>
-                    <ListBox ItemsSource="{Binding Items}" Background="{x:Null}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="md:Item">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Title}" Foreground="LightCyan" TextWrapping="WrapWithOverflow" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Description}" Foreground="LightCyan" TextWrapping="WrapWithOverflow"/>
-                                    <TextBlock Text="{Binding Link}" Foreground="LightCyan" TextWrapping="WrapWithOverflow" TextAlignment="Right"/>
-                                    <TextBlock Text="{Binding PublishDate}" Foreground="LightCyan" TextWrapping="WrapWithOverflow" TextAlignment="Right"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
+                <ListBox ItemsSource="{Binding Items}" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="md:Item">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Title}" Style="{StaticResource Header}"/>
+                                <TextBlock Text="{Binding Description}" Style="{StaticResource Description}"/>
+                                <TextBlock Text="{Binding Link}" Style="{StaticResource Link}"/>
+                                <TextBlock Text="{Binding PublishDate}" Style="{StaticResource Date}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </TabItem>
         </TabControl>
     </DockPanel>

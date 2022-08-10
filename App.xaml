@@ -4,6 +4,33 @@
              xmlns:local="clr-namespace:RSSFeeder"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="Header" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="Foreground" Value="PowderBlue"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="Description" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Berlin Sans FB"/>
+            <Setter Property="Foreground" Value="PowderBlue"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="Link" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="Berlin Sans FB"/>
+            <Setter Property="Foreground" Value="PowderBlue"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="Date" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="Berlin Sans FB"/>
+            <Setter Property="Foreground" Value="PowderBlue"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
     </Application.Resources>
 </Application>
