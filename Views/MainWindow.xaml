@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:md="clr-namespace:RSSFeeder.Models"
         xmlns:vm="clr-namespace:RSSFeeder.ViewModels"
         xmlns:local="clr-namespace:RSSFeeder"
         mc:Ignorable="d"
@@ -32,12 +33,20 @@
         </Menu>
         <TabControl Background="{x:Null}">
             <TabItem Header="{Binding Title}" Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel>
-                    <TextBlock Text="{Binding Items[1].Title}" Foreground="LightCyan" TextWrapping="WrapWithOverflow"/>
-                    <TextBlock Text="{Binding Items[1].Description}" Foreground="LightCyan" TextWrapping="WrapWithOverflow"/>
-                    <TextBlock Text="{Binding Items[1].Link}" Foreground="LightCyan" TextWrapping="WrapWithOverflow"/>
-                    <TextBlock Text="{Binding Items[1].PublishDate}" Foreground="LightCyan" TextWrapping="WrapWithOverflow"/>
-                </StackPanel>
+                <Grid>
+                    <ListBox ItemsSource="{Binding Items}" Background="{x:Null}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="md:Item">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title}" Foreground="LightCyan" TextWrapping="WrapWithOverflow" TextAlignment="Center" />
+                                    <TextBlock Text="{Binding Description}" Foreground="LightCyan" TextWrapping="WrapWithOverflow"/>
+                                    <TextBlock Text="{Binding Link}" Foreground="LightCyan" TextWrapping="WrapWithOverflow" TextAlignment="Right"/>
+                                    <TextBlock Text="{Binding PublishDate}" Foreground="LightCyan" TextWrapping="WrapWithOverflow" TextAlignment="Right"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
