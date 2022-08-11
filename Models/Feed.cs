@@ -12,5 +12,10 @@ namespace RSSFeeder.Models
         public string Description { get; set; }
         public string Link { get; set; }
         public IEnumerable<Item> Items { get; set; }
+
+        public override string ToString()
+        {
+            return this.Title;
+        }
     }
 }

@@ -26,8 +26,8 @@
                 <MenuItem Header="Settings" Style="{StaticResource MenuItem}" Command="{Binding OpenSettingsWindowCommand}"/>
             </MenuItem>
         </Menu>
-        <TabControl Background="{x:Null}" Padding="5,5,5,5">
-            <TabItem Header="{Binding Title}" Background="{x:Null}" BorderBrush="{x:Null}">
+        <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding Feeds}">
+            <!--<TabItem Header="{Binding Title}" Background="{x:Null}" BorderBrush="{x:Null}">
                 <ListBox ItemsSource="{Binding Items}" Background="{x:Null}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="md:Item">
@@ -41,7 +41,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
     </DockPanel>
 </Window>

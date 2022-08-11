@@ -22,6 +22,9 @@ namespace RSSFeeder.ViewModels
 
             Feeds = new ObservableCollection<Feed>();
             Feeds.Add(GetFeedByUrl(DefaultUrl));
+            Feeds.Add(GetFeedByUrl(@"https://www.fontanka.ru/fontanka.rss"));
+            Feeds.Add(GetFeedByUrl(@"https://news.yandex.ru/index.rss"));
+            
             Items = new ObservableCollection<Item>(Feeds[0].Items);
             Title = Feeds[0].Title;
 
