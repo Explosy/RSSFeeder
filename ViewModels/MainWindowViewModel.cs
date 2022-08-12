@@ -12,6 +12,7 @@ namespace RSSFeeder.ViewModels
 {
     internal class MainWindowViewModel : BaseViewModel
     {
+        /// <summary>Коллекция лент для отображения вкладками в TabControl</summary>
         public ObservableCollection<Feed> FeedTabs { get; }
         
         

@@ -5,5 +5,8 @@
     <Setting Name="DefaultUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://habr.com/rss/interesting/</Value>
     </Setting>
+    <Setting Name="UpdateTime" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">1500</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

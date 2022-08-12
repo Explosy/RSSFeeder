@@ -15,9 +15,6 @@
             <Setter Property="Background" Value="Black"/>
         </Style>
 
-        <!--<ResourceDictionary Source="Resources/TextStyle.xaml"/>
-        <ResourceDictionary Source="Resources/WindowsStyle.xaml"/>-->
-
         <Style x:Key="Header" TargetType="TextBlock">
             <Setter Property="FontSize" Value="21"/>
             <Setter Property="FontFamily" Value="Berlin Sans FB"/>

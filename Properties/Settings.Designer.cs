@@ -34,5 +34,17 @@ namespace RSSFeeder.Properties {
                 this["DefaultUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1500")]
+        public uint UpdateTime {
+            get {
+                return ((uint)(this["UpdateTime"]));
+            }
+            set {
+                this["UpdateTime"] = value;
+            }
+        }
     }
 }
