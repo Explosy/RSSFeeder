@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace RSSFeeder
+namespace RSSFeeder.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

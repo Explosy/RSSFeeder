@@ -19,6 +19,7 @@ namespace RSSFeeder.ViewModels
         }
         public SettingsWindowViewModel()
         {
+
             DefaultUrl = Properties.Settings.Default.DefaultUrl;
         }
     }

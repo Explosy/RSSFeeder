@@ -1,4 +1,5 @@
 ﻿using RSSFeeder.Models;
+using RSSFeeder.Services;
 using RSSFeeder.Views;
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,38 @@ namespace RSSFeeder.ViewModels
     {
         /// <summary>Коллекция лент для отображения вкладками в TabControl</summary>
         public ObservableCollection<Feed> FeedTabs { get; }
-        
-        
+
+        private DataService _DataService;
+        private System.Collections.Specialized.StringCollection UserUrls;
+
+
+        public uint UpdateTime { get; set; }
         public string DefaultUrl { get; set; }
+        
+        
         public MainWindowViewModel()
         {
             DefaultUrl = Properties.Settings.Default.DefaultUrl;
+            UpdateTime = Properties.Settings.Default.UpdateTime;
+            _DataService = new DataService();
+            UserUrls = Properties.Settings.Default.UserUrls;
 
             FeedTabs = new ObservableCollection<Feed>();
-            FeedTabs.Add(GetFeedByUrl(DefaultUrl));
-            FeedTabs.Add(GetFeedByUrl(@"https://www.fontanka.ru/fontanka.rss"));
-            FeedTabs.Add(GetFeedByUrl(@"https://news.yandex.ru/index.rss"));
+            if (UserUrls.Count != 0)
+            {
+                foreach (var url in UserUrls)
+                {
+                    var newFeed = _DataService.GetFeedByUrl(url);
+                    FeedTabs.Add(newFeed);
+                }
+            }
+            else if (!Equals(DefaultUrl, ""))
+            {
+                var newFeed = _DataService.GetFeedByUrl(DefaultUrl);
+                FeedTabs.Add(newFeed);
+            }
             
-
+            
             #region Commands
 
             OpenSettingsWindowCommand = new ActionCommand(OnOpenSettingsWindowCommandExecuted, CanOpenSettingsWindowCommandExecute);
@@ -48,8 +68,8 @@ namespace RSSFeeder.ViewModels
 
         #endregion
 
-        
 
+        #region old version GetFeed
         private Feed GetFeedByUrl (string url)
         {
             Feed newFeed = new Feed();
@@ -139,5 +159,6 @@ namespace RSSFeeder.ViewModels
                 xmlTextReader.Close();
             }
         }
+        #endregion
     }
 }

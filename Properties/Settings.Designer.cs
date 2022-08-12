@@ -46,5 +46,16 @@ namespace RSSFeeder.Properties {
                 this["UpdateTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection UserUrls {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["UserUrls"]));
+            }
+            set {
+                this["UserUrls"] = value;
+            }
+        }
     }
 }

@@ -4,60 +4,12 @@
              xmlns:local="clr-namespace:RSSFeeder"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="ButtonsText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontFamily" Value="Arial Black"/>
-            <Setter Property="Foreground" Value="PowderBlue"/>
-        </Style>
-        <Style x:Key="MenuItem" TargetType="MenuItem">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="PowderBlue"/>
-            <Setter Property="Background" Value="Black"/>
-        </Style>
-
-        <Style x:Key="Header" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="21"/>
-            <Setter Property="FontFamily" Value="Berlin Sans FB"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="PowderBlue"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
-
-        <Style x:Key="Description" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontFamily" Value="Berlin Sans FB"/>
-            <Setter Property="Foreground" Value="PowderBlue"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
-
-        <Style x:Key="Link" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontFamily" Value="Berlin Sans FB"/>
-            <Setter Property="Foreground" Value="PowderBlue"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="FontStyle" Value="Italic"/>
-            <Setter Property="TextAlignment" Value="Right"/>
-        </Style>
-
-        <Style x:Key="Date" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontFamily" Value="Berlin Sans FB"/>
-            <Setter Property="Foreground" Value="PowderBlue"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="TextAlignment" Value="Right"/>
-        </Style>
-
-        <Style x:Key="DefaultStyle" TargetType="Window">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF0E1C27" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/TextStyle.xaml"/>
+                <ResourceDictionary Source="Resources/WindowsStyle.xaml"/>
+                <ResourceDictionary Source="Resources/TempItems.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
