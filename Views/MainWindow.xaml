@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:RSSFeeder"
         mc:Ignorable="d"
         Title="" Height="550" Width="900" ResizeMode="NoResize"
-        Style="{StaticResource WindowsStyle}">
+        Style="{StaticResource DefaultStyle}">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -26,22 +26,30 @@
                 <MenuItem Header="Settings" Style="{StaticResource MenuItem}" Command="{Binding OpenSettingsWindowCommand}"/>
             </MenuItem>
         </Menu>
-        <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding Feeds}">
-            <!--<TabItem Header="{Binding Title}" Background="{x:Null}" BorderBrush="{x:Null}">
-                <ListBox ItemsSource="{Binding Items}" Background="{x:Null}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate DataType="md:Item">
-                            <StackPanel Orientation="Vertical" >
-                                <TextBlock Text="{Binding Title}" Style="{StaticResource Header}" Margin="0,0,0,10" />
-                                <TextBlock Text="{Binding Description}" Style="{StaticResource Description}"/>
-                                <TextBlock Text="{Binding Link}" Style="{StaticResource Link}" Margin="0,15,0,0"/>
-                                <TextBlock Text="{Binding PublishDate}" Style="{StaticResource Date}"/>
-                                <Rectangle Height="2" Fill="PowderBlue" Margin="0,0,0,15"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </TabItem>-->
+        <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding FeedTabs}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ListBox ItemsSource="{Binding Items}" Background="{x:Null}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="md:Item">
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Text="{Binding Title}" Style="{StaticResource Header}" Margin="0,0,0,10" />
+                                    <TextBlock Text="{Binding Description}" Style="{StaticResource Description}"/>
+                                    <TextBlock Text="{Binding Link}" Style="{StaticResource Link}" Margin="0,15,0,0"/>
+                                    <TextBlock Text="{Binding PublishDate}" Style="{StaticResource Date}"/>
+                                    <Rectangle Height="2" Fill="PowderBlue" Margin="0,0,0,15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
     </DockPanel>
 </Window>

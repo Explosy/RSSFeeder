@@ -2,7 +2,7 @@
 
 namespace RSSFeeder.ViewModels
 {
-    internal abstract class ViewModel : INotifyPropertyChanged
+    internal abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

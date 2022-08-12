@@ -3,7 +3,7 @@
 
 namespace RSSFeeder.ViewModels
 {
-    internal class SettingsWindowViewModel : ViewModel
+    internal class SettingsWindowViewModel : BaseViewModel
     {
         private string _DefaultUrl;
         public string DefaultUrl {

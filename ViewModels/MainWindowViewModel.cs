@@ -10,23 +10,21 @@ using System.Xml;
 
 namespace RSSFeeder.ViewModels
 {
-    internal class MainWindowViewModel : ViewModel
+    internal class MainWindowViewModel : BaseViewModel
     {
-        public ObservableCollection<Feed> Feeds { get; }
-        public ObservableCollection<Item> Items { get; }
+        public ObservableCollection<Feed> FeedTabs { get; }
+        
         
         public string DefaultUrl { get; set; }
         public MainWindowViewModel()
         {
             DefaultUrl = Properties.Settings.Default.DefaultUrl;
 
-            Feeds = new ObservableCollection<Feed>();
-            Feeds.Add(GetFeedByUrl(DefaultUrl));
-            Feeds.Add(GetFeedByUrl(@"https://www.fontanka.ru/fontanka.rss"));
-            Feeds.Add(GetFeedByUrl(@"https://news.yandex.ru/index.rss"));
+            FeedTabs = new ObservableCollection<Feed>();
+            FeedTabs.Add(GetFeedByUrl(DefaultUrl));
+            FeedTabs.Add(GetFeedByUrl(@"https://www.fontanka.ru/fontanka.rss"));
+            FeedTabs.Add(GetFeedByUrl(@"https://news.yandex.ru/index.rss"));
             
-            Items = new ObservableCollection<Item>(Feeds[0].Items);
-            Title = Feeds[0].Title;
 
             #region Commands
 
@@ -45,20 +43,11 @@ namespace RSSFeeder.ViewModels
         }
         private bool CanOpenSettingsWindowCommandExecute(object p) => true;
         #endregion
+
+
         #endregion
 
-        private string _Title = "RSSFeeder";
         
-        public string Title
-        {
-            get => _Title;
-            set
-            {
-                if (Equals(_Title, value)) return;
-                _Title = value;
-                OnPropertyChanged();
-            }
-        }
 
         private Feed GetFeedByUrl (string url)
         {
