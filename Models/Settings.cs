@@ -22,7 +22,6 @@ namespace RSSFeeder.Models
             AppSettings.Default.DefaultURL = DefaultUrl;
             AppSettings.Default.UpdateTime = UpdateTime;
             AppSettings.Default.Save();
-
         }
     }
 }

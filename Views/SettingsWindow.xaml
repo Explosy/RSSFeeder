@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
                 <TextBlock DockPanel.Dock="Top" Text="Feeds" TextAlignment="Center" Style="{StaticResource Description}"/>
-                <ListBox ItemsSource="{Binding UserURLs}" SelectedItem="{Binding SelectedURL}" Margin="5,5"/>
+                <ListBox ItemsSource="{Binding UserURLs}" SelectedItem="{Binding SelectedURL}" Margin="5,5" d:ItemsSource="{d:SampleData ItemCount=5}"/>
             </DockPanel>
             <DockPanel Grid.Column="1">
                 <StackPanel DockPanel.Dock="Top">
