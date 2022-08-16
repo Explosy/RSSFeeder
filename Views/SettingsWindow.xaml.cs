@@ -23,5 +23,6 @@ namespace RSSFeeder.Views
         {
             InitializeComponent();
         }
+
     }
 }

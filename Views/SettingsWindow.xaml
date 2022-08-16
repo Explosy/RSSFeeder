@@ -7,9 +7,8 @@
         xmlns:l="clr-namespace:RSSFeeder"
         xmlns:local="clr-namespace:RSSFeeder.Views"
         mc:Ignorable="d"
-        Title="" Height="300" Width="400" ResizeMode="NoResize"
-        Style="{StaticResource DefaultStyle }">
-    
+        Title="" Height="300" Width="410" ResizeMode="NoResize"
+        Style="{StaticResource DefaultStyle}">
     <Window.DataContext>
         <vm:SettingsWindowViewModel/>
     </Window.DataContext>
@@ -17,21 +16,28 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="220"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" >
-                <TextBlock Text="Default Feed" TextAlignment="Center" Style="{StaticResource Description}"/>
-                <TextBox Text="{Binding DefaultUrl}"  Margin="3,3,3,3"/>
-                <TextBlock Text="Feeds" TextAlignment="Center" Style="{StaticResource Description}"/>
-                <ListBox>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="1"></TextBlock>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
-            
+            <DockPanel Grid.Column="0">
+                <TextBlock DockPanel.Dock="Top" Text="Feeds" TextAlignment="Center" Style="{StaticResource Description}"/>
+                <ListBox ItemsSource="{Binding UserURLs}" SelectedItem="{Binding SelectedURL}" Margin="5,5"/>
+            </DockPanel>
+            <DockPanel Grid.Column="1">
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="Default Feed" TextAlignment="Center" Style="{StaticResource Description}"/>
+                    <TextBox Text="{Binding DefaultUrl}"  Margin="0,5,0,3"/>
+                    <TextBlock Text="Update Time (sec)" TextAlignment="Center" Style="{StaticResource Description}" Padding="0,10,0,5"/>
+                    <TextBox Text="{Binding UpdateTime, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center"/>
+                    <Slider Value="{Binding UpdateTime}" Minimum="60" Maximum="3600" Margin="5"/>
+                    <TextBlock Text="Add Feed" TextAlignment="Center" Style="{StaticResource Description}" Padding="0,10,0,5"/>
+                    <TextBox />
+                </StackPanel>
+                <UniformGrid DockPanel.Dock="Bottom" Rows="1" VerticalAlignment="Bottom"  Height="25">
+                    <Button Content="Add Feed" Margin="0,0,0,5" Foreground="PowderBlue" FontSize="11" FontFamily="Berlin Sans FB" Background="#FF0C1821" BorderBrush="White"/>
+                    <Button Content="Delete Feed" Margin="3,0,0,5" Foreground="PowderBlue" FontSize="11" FontFamily="Berlin Sans FB" Background="#FF0C1821" BorderBrush="White"/>
+                    <Button Content="Visible?" Margin="3,0,0,5" Foreground="PowderBlue" FontSize="11" FontFamily="Berlin Sans FB" Background="#FF0C1821" BorderBrush="White"/>
+                </UniformGrid>
+            </DockPanel>
         </Grid>
     </DockPanel>
 </Window>

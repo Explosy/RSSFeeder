@@ -8,16 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RSSFeeder.Properties {
+namespace RSSFeeder {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
-    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class AppSettings : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static AppSettings defaultInstance = ((AppSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new AppSettings())));
         
-        public static Settings Default {
+        public static AppSettings Default {
             get {
                 return defaultInstance;
             }
@@ -26,18 +26,18 @@ namespace RSSFeeder.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://habr.com/rss/interesting/")]
-        public string DefaultUrl {
+        public string DefaultURL {
             get {
-                return ((string)(this["DefaultUrl"]));
+                return ((string)(this["DefaultURL"]));
             }
             set {
-                this["DefaultUrl"] = value;
+                this["DefaultURL"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1500")]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
         public uint UpdateTime {
             get {
                 return ((uint)(this["UpdateTime"]));
@@ -49,12 +49,12 @@ namespace RSSFeeder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection UserUrls {
+        public global::System.Collections.Generic.List<System.String> UserURLs {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["UserUrls"]));
+                return ((global::System.Collections.Generic.List<System.String>)(this["UserURLs"]));
             }
             set {
-                this["UserUrls"] = value;
+                this["UserURLs"] = value;
             }
         }
     }

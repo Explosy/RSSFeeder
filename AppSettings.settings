@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RSSFeeder" GeneratedClassName="AppSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://habr.com/rss/interesting/</Value>
+    </Setting>
+    <Setting Name="UpdateTime" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="UserURLs" Type="System.Collections.Generic.List&lt;System.String&gt;" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
