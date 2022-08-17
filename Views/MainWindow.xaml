@@ -21,7 +21,6 @@
                         <TextBlock Text="RSS" Style="{StaticResource ButtonsText}"/>
                     </StackPanel>
                 </MenuItem.Header> 
-                <MenuItem Header="Channels" Style="{StaticResource MenuItem}"/>
                 <MenuItem Header="Settings" Style="{StaticResource MenuItem}" Command="{Binding OpenSettingsWindowCommand}"/>
             </MenuItem>
         </Menu>
