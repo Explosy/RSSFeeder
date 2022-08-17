@@ -20,7 +20,13 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
                 <TextBlock DockPanel.Dock="Top" Text="Feeds" TextAlignment="Center" Style="{StaticResource Description}"/>
-                <ListBox ItemsSource="{Binding UserURLs}" SelectedItem="{Binding SelectedURL}" Margin="5,5" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <ListBox ItemsSource="{Binding FeedTabs}" SelectedItem="{Binding SelectedURL}" Margin="5,5" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </DockPanel>
             <DockPanel Grid.Column="1">
                 <StackPanel DockPanel.Dock="Top">
@@ -33,7 +39,7 @@
                     <TextBox x:Name="AddFeedBox"/>
                 </StackPanel>
                 <UniformGrid DockPanel.Dock="Bottom" Rows="1" VerticalAlignment="Bottom"  Height="25">
-                    <Button Content="Add Feed" Command="{Binding CreateNewFeedCommand}" Margin="0,0,0,5" Foreground="PowderBlue" FontSize="11" FontFamily="Berlin Sans FB" Background="#FF0C1821" BorderBrush="White"/>
+                    <Button Content="Add Feed" Command="{Binding CreateNewFeedCommand}" CommandParameter="{Binding ElementName=AddFeedBox, Path=Text}" Margin="0,0,0,5" Foreground="PowderBlue" FontSize="11" FontFamily="Berlin Sans FB" Background="#FF0C1821" BorderBrush="White"/>
                     <Button Content="Delete Feed" Command="{Binding DeleteFeedCommand}" CommandParameter="{Binding SelectedURL}" Margin="3,0,0,5" Foreground="PowderBlue" FontSize="11" FontFamily="Berlin Sans FB" Background="#FF0C1821" BorderBrush="White"/>
                     <Button Content="Visible?" Command="{Binding ChangeVisibleFeedCommand}" Margin="3,0,0,5" Foreground="PowderBlue" FontSize="11" FontFamily="Berlin Sans FB" Background="#FF0C1821" BorderBrush="White"/>
                 </UniformGrid>

@@ -1,4 +1,5 @@
-﻿using RSSFeeder.Models;
+﻿using Prism.Mvvm;
+using RSSFeeder.Models;
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,35 +7,34 @@ using System.Windows.Input;
 
 namespace RSSFeeder.ViewModels
 {
-    internal class SettingsWindowViewModel : BaseViewModel
+    internal class SettingsWindowViewModel : BindableBase
     {
 
         #region Setting Fields
         public string DefaultUrl
         {
             get => Settings.DefaultUrl;
-            set => Set(ref Settings.DefaultUrl, value);
+            set => SetProperty(ref Settings.DefaultUrl, value);
         }
         public List<string> UserURLs
         {
             get => Settings.UserURLs;
-            set => Set(ref Settings.UserURLs, value);
+            set => SetProperty(ref Settings.UserURLs, value);
         }
         public uint UpdateTime
         {
             get => Settings.UpdateTime;
-            set => Set(ref Settings.UpdateTime, value);
+            set => SetProperty(ref Settings.UpdateTime, value);
         }
         #endregion
 
         #region Forms Fields
-        private string _SelectedURL;
-        public string SelectedURL { get => _SelectedURL; set => Set(ref _SelectedURL, value); }
-
+        private Feed _SelectedURL;
+        public Feed SelectedURL { get => _SelectedURL; set => SetProperty(ref _SelectedURL, value); }
+        public ReadOnlyObservableCollection<Feed> FeedTabs => _FeedsModel.FeedTabs;
+        private readonly FeedsModel _FeedsModel;
         #endregion
 
-        private readonly FeedsModel _FeedsModel;
-        public ReadOnlyObservableCollection<Feed> FeedTabs => _FeedsModel.FeedTabs;
 
         public SettingsWindowViewModel()
         {
@@ -56,12 +56,13 @@ namespace RSSFeeder.ViewModels
         private bool CanCreateNewFeedCommandExecute(object p) => true;
         private void OnCreateNewFeedCommandExecuted(object p)
         {
-            _FeedsModel.AddFeed(DefaultUrl);
+            var url = (string)p;
+            if (!Equals(p,"")) _FeedsModel.AddFeed(url);
         }
         #endregion
         #region DeleteFeedCommand
         public ICommand DeleteFeedCommand { get; }
-        private bool CanDeleteFeedCommandExecute(object p) => p is string; //Feed feed && FeedTabs.Contains(feed);
+        private bool CanDeleteFeedCommandExecute(object p) => p is Feed feed && FeedTabs.Contains(feed);
         private void OnDeleteFeedCommandExecuted(object p)
         {
             if (!(p is Feed feed)) return;

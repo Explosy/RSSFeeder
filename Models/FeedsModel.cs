@@ -10,19 +10,19 @@ using System.Timers;
 
 namespace RSSFeeder.Models
 {
-    internal class FeedsModel : BindableBase//INotifyPropertyChanged
+    internal class FeedsModel : BindableBase
     {
         private DataService dataService;
         
-        private readonly ObservableCollection<Feed> _FeedTabs = new ObservableCollection<Feed>();
+        private ObservableCollection<Feed> _FeedTabs = new ObservableCollection<Feed>();
         public readonly ReadOnlyObservableCollection<Feed> FeedTabs;
 
         #region Singleton of FeedsModel
         private static FeedsModel instance;
-        public FeedsModel()
+        private FeedsModel()
         {
             dataService = new DataService();
-            
+            FeedTabs = new ReadOnlyObservableCollection<Feed>(_FeedTabs);
 
             if (App.IsDesignMode)
             {
@@ -31,16 +31,15 @@ namespace RSSFeeder.Models
             }
             else if (Settings.UserURLs.Count != 0)
             {
-                //RefreshData();
+                _RefreshData();
             }
             else
             {
                 Feed newFeed = dataService.GetFeedByUrl(Settings.DefaultUrl);
                 _FeedTabs.Add(newFeed);
             }
-            FeedTabs = new ReadOnlyObservableCollection<Feed>(_FeedTabs);
+            
         }
-
         public static FeedsModel getInstance()
         {
             if (instance == null)
@@ -49,57 +48,36 @@ namespace RSSFeeder.Models
         }
         #endregion
 
-        //public FeedsModel()
-        //{
-        //    dataService = new DataService();
-
-        //    if (App.IsDesignMode)
-        //    {
-        //        var newFeed = dataService.GetFeedByUrl(@"https://habr.com/rss/interesting/");
-        //        _FeedTabs.Add(newFeed);
-        //    }
-        //    else if (!(Settings.UserUrls is null) && (Settings.UserUrls.Count != 0))
-        //    {
-        //        RefreshData();
-        //    }
-        //    else if (Settings.DefaultUrl != null && !Equals(Settings.DefaultUrl, ""))
-        //    {
-        //        Feed newFeed = dataService.GetFeedByUrl(Settings.DefaultUrl);
-        //        _FeedTabs.Add(newFeed);
-        //    }
-
-        //    FeedTabs = new ReadOnlyObservableCollection<Feed>(_FeedTabs);
-        //}
-
         #region Methods of Model
         public void AddFeed (string url)
         {
             var newFeed = dataService.GetFeedByUrl(url);
             _FeedTabs.Add(newFeed);
+            Settings.UserURLs.Add(url);
         }
         public void RemoveFeed (Feed feed)
         {
             _FeedTabs.Remove(feed);
+            Settings.UserURLs.Remove(feed.Link);
         }
         public void RefreshData(object sender, ElapsedEventArgs e)
         {
-            _FeedTabs.Clear();
-            foreach (var url in Settings.UserURLs)
-            {
-                if (url is null) continue;
-                Feed newFeed = dataService.GetFeedByUrl(url);
-                _FeedTabs.Add(newFeed);
-            }
+            _RefreshData();
         }
-
+        private void _RefreshData()
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                _FeedTabs.Clear();
+                foreach (var url in Settings.UserURLs)
+                {
+                    if (url is null) continue;
+                    Feed newFeed = dataService.GetFeedByUrl(url);
+                    _FeedTabs.Add(newFeed);
+                }
+            });
+        }
         #endregion
 
-        #region INotifyPropertyChanged
-        //public event PropertyChangedEventHandler? PropertyChanged;
-        //protected virtual void OnPropertyChanged([CallerMemberName] string? PropertyName = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-        //}
-        #endregion
     }
 }

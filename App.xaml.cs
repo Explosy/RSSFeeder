@@ -18,5 +18,11 @@ namespace RSSFeeder
             base.OnStartup(e);
         }
 
+        protected override void OnExit(ExitEventArgs e)
+        {
+            Settings.Save();
+            base.OnExit(e);
+        }
+
     }
 }
