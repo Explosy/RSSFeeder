@@ -4,6 +4,7 @@ using RSSFeeder.Services;
 using RSSFeeder.Views;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Timers;
 using System.Windows.Input;
@@ -30,9 +31,8 @@ namespace RSSFeeder.ViewModels
             #endregion
 
             #region Commands
-
             OpenSettingsWindowCommand = new ActionCommand(OnOpenSettingsWindowCommandExecuted, CanOpenSettingsWindowCommandExecute);
-            
+            OpenInWebCommand = new ActionCommand(OnOpenInWebCommandExecuted, CanOpenInWebCommandExecuted);
             #endregion
         }
 
@@ -46,7 +46,15 @@ namespace RSSFeeder.ViewModels
         }
         private bool CanOpenSettingsWindowCommandExecute(object p) => true;
         #endregion
-        
+
+        #region OpenInWebCommand
+        public ICommand OpenInWebCommand { get; }
+        private void OnOpenInWebCommandExecuted(object p)
+        {
+            if (p is string url) Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+        }
+        private bool CanOpenInWebCommandExecuted(object p) => true;
+        #endregion
         #endregion
 
     }

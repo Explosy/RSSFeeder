@@ -11,4 +11,8 @@
         <Setter Property="Foreground" Value="PowderBlue"/>
         <Setter Property="Background" Value="Black"/>
     </Style>
+    <Style x:Key="MenuItem2" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="PowderBlue"/>
+    </Style>
 </ResourceDictionary>

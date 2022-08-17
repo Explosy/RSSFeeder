@@ -7,7 +7,9 @@
         xmlns:l="clr-namespace:RSSFeeder"
         xmlns:md="clr-namespace:RSSFeeder.Models"
         xmlns:vm="clr-namespace:RSSFeeder.ViewModels"
-        Title="" Height="550" Width="900" ResizeMode="NoResize"
+        xmlns:sv="clr-namespace:RSSFeeder.Services"
+        x:Name="mainWindow"
+        Height="550" Width="900" ResizeMode="NoResize"
         Style="{StaticResource DefaultStyle}">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -21,33 +23,50 @@
                         <TextBlock Text="RSS" Style="{StaticResource ButtonsText}"/>
                     </StackPanel>
                 </MenuItem.Header>
-                <MenuItem Header="Settings" Style="{StaticResource MenuItem}" Command="{Binding OpenSettingsWindowCommand}"/>
+                <MenuItem Command="{Binding OpenSettingsWindowCommand}" Style="{StaticResource MenuItem}">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Solid_SlidersH" Height="15" Margin="0,0,10,0" Foreground="PowderBlue"></fa:ImageAwesome>
+                            <TextBlock Text="Settings" Style="{StaticResource MenuItem2}"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
             </MenuItem>
         </Menu>
-        <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding FeedTabs}">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title}" />
-                </DataTemplate>
-            </TabControl.ItemTemplate>
+        <sv:ContextHolder>
+            <sv:ContextHolder.Commands>
+                <sv:CommandBinding RoutedCommand="{x:Static ApplicationCommands.Open}"
+                           RelayCommand="{Binding OpenInWebCommand}"/>
+            </sv:ContextHolder.Commands>
+            <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding FeedTabs}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
 
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <ListBox ItemsSource="{Binding Items}" Background="{x:Null}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="md:Item">
-                                <StackPanel Orientation="Vertical" >
-                                    <TextBlock Text="{Binding Title}" Style="{StaticResource Header}" Margin="0,0,0,10" />
-                                    <TextBlock Text="{Binding Description}" Style="{StaticResource Description}"/>
-                                    <TextBlock Text="{Binding Link}" Style="{StaticResource Link}" Margin="0,15,0,0"/>
-                                    <TextBlock Text="{Binding PublishDate}" Style="{StaticResource Date}"/>
-                                    <Rectangle Height="2" Fill="PowderBlue" Margin="0,0,0,15"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ListBox ItemsSource="{Binding Items}" Background="{x:Null}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="md:Item">
+                                    <StackPanel Orientation="Vertical" >
+                                        <TextBlock HorizontalAlignment="Center" Margin="0,0,0,10">
+                                            <Hyperlink Command="{x:Static ApplicationCommands.Open}" CommandParameter="{Binding Link}" TextDecorations="None">
+                                                <TextBlock Text="{Binding Title}" Style="{StaticResource Header}"/>
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Description}" Style="{StaticResource Description}"/>
+                                        <TextBlock Text="{Binding Link}" Style="{StaticResource Link}" Margin="0,15,0,0"/>
+                                        <TextBlock Text="{Binding PublishDate}" Style="{StaticResource Date}"/>
+                                        <Rectangle Height="2" Fill="PowderBlue" Margin="0,0,0,15"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </sv:ContextHolder>
     </DockPanel>
 </Window>

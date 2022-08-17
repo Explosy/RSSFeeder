@@ -53,7 +53,7 @@ namespace RSSFeeder.ViewModels
 
         #region CreateNewFeedCommand
         public ICommand CreateNewFeedCommand { get; }
-        private bool CanCreateNewFeedCommandExecute(object p) => true;
+        private bool CanCreateNewFeedCommandExecute(object p) => Equals((string)p,"");
         private void OnCreateNewFeedCommandExecuted(object p)
         {
             var url = (string)p;

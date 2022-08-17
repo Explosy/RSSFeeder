@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:RSSFeeder.ViewModels"
         xmlns:md="clr-namespace:RSSFeeder.Models"
         xmlns:l="clr-namespace:RSSFeeder"
@@ -23,7 +24,10 @@
                 <ListBox ItemsSource="{Binding FeedTabs}" SelectedItem="{Binding SelectedURL}" Margin="5,5" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Title}" />
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome Height="10" Margin="0,0,5,0" Foreground="Black" Icon="Solid_Eye"/>
+                                <TextBlock Text="{Binding Title}" />
+                            </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

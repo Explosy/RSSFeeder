@@ -76,7 +76,7 @@ namespace RSSFeeder.Services
             }
             catch (Exception exception)
             {
-                return new Feed() { Title = "Error", Description = exception.Message };
+                return new Feed() { Title = "Error", Items = new List<Item>() { new Item() { Description = exception.Message } } };
             }
             
 
@@ -100,7 +100,7 @@ namespace RSSFeeder.Services
             }
             catch (System.IO.FileNotFoundException)
             {
-                throw new Exception("Файл" + url + "не найден!");
+                throw new Exception("Файл " + url + " не найден!");
             }
             finally
             {
