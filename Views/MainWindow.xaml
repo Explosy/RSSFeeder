@@ -20,8 +20,7 @@
                         <fa:ImageAwesome Icon="Solid_Bars" Height="15" Margin="0,0,10,0" Foreground="PowderBlue"></fa:ImageAwesome>
                         <TextBlock Text="RSS" Style="{StaticResource ButtonsText}"/>
                     </StackPanel>
-                </MenuItem.Header> 
-                <MenuItem Header="Channels" Style="{StaticResource MenuItem}"/>
+                </MenuItem.Header>
                 <MenuItem Header="Settings" Style="{StaticResource MenuItem}" Command="{Binding OpenSettingsWindowCommand}"/>
             </MenuItem>
         </Menu>

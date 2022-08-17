@@ -5,7 +5,7 @@ namespace RSSFeeder.ViewModels
 {
     internal abstract class BaseViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? PropertyName = null)
         {

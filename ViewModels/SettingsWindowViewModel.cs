@@ -1,31 +1,29 @@
 ﻿using RSSFeeder.Models;
-using System;
+
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace RSSFeeder.ViewModels
 {
     internal class SettingsWindowViewModel : BaseViewModel
     {
-        #region Setting Fields
-        private string _DefaultUrl;
-        public string DefaultUrl {
-            get => _DefaultUrl;
-            set => Set(ref _DefaultUrl, value);
-        }
 
-        private List<string> _UserURLs;
+        #region Setting Fields
+        public string DefaultUrl
+        {
+            get => Settings.DefaultUrl;
+            set => Set(ref Settings.DefaultUrl, value);
+        }
         public List<string> UserURLs
         {
-            get => _UserURLs;
-            set => Set(ref _UserURLs, value);
+            get => Settings.UserURLs;
+            set => Set(ref Settings.UserURLs, value);
         }
-
-        private uint _UpdateTime;
         public uint UpdateTime
         {
-            get => _UpdateTime;
-            set => Set(ref _UpdateTime, value);
+            get => Settings.UpdateTime;
+            set => Set(ref Settings.UpdateTime, value);
         }
         #endregion
 
@@ -35,41 +33,51 @@ namespace RSSFeeder.ViewModels
 
         #endregion
 
+        private readonly FeedsModel _FeedsModel;
+        public ReadOnlyObservableCollection<Feed> FeedTabs => _FeedsModel.FeedTabs;
+
         public SettingsWindowViewModel()
         {
-            DefaultUrl = Settings.DefaultUrl;
-            UserURLs = Settings.UserUrls;
-            UpdateTime = Settings.UpdateTime;
+            _FeedsModel = FeedsModel.getInstance();
+
+            #region Commands
+            CreateNewFeedCommand = new ActionCommand(OnCreateNewFeedCommandExecuted, CanCreateNewFeedCommandExecute);
+            DeleteFeedCommand = new ActionCommand(OnDeleteFeedCommandExecuted, CanDeleteFeedCommandExecute);
+            ChangeVisibleFeedCommand = new ActionCommand(OnChangeVisibleFeedCommandExecuted, CanChangeVisibleFeedCommandExecute);
+            #endregion
+
         }
 
-        public void SaveSettings(object sender, System.ComponentModel.CancelEventArgs e)
+
+        #region Commands
+
+        #region CreateNewFeedCommand
+        public ICommand CreateNewFeedCommand { get; }
+        private bool CanCreateNewFeedCommandExecute(object p) => true;
+        private void OnCreateNewFeedCommandExecuted(object p)
         {
-            Settings.DefaultUrl = DefaultUrl;
-            Settings.UserUrls = UserURLs;
-            Settings.UpdateTime = UpdateTime;
+            _FeedsModel.AddFeed(DefaultUrl);
         }
+        #endregion
+        #region DeleteFeedCommand
+        public ICommand DeleteFeedCommand { get; }
+        private bool CanDeleteFeedCommandExecute(object p) => p is string; //Feed feed && FeedTabs.Contains(feed);
+        private void OnDeleteFeedCommandExecuted(object p)
+        {
+            if (!(p is Feed feed)) return;
+            _FeedsModel.RemoveFeed(feed);
+        }
+        #endregion
+        #region ChangeVisibleFeedCommand
+        public ICommand ChangeVisibleFeedCommand { get; }
+        private bool CanChangeVisibleFeedCommandExecute(object p) => true;
+        private void OnChangeVisibleFeedCommandExecuted(object p)
+        {
+            if (!(p is Feed feed)) return;
+            feed.Visible = !feed.Visible;
+        }
+        #endregion
 
-        //#region Commands
-
-        //#region CreateNewFeed
-        //public ICommand CreateNewFeed { get; }
-        //private bool CanCreateNewFeedCommandExecute(object p) => true;
-        //private void OnCreateNewFeedCommandExecuted(object p)
-        //{
-        //    var newFeed = dataService.GetFeedByUrl(Settings.DefaultUrl);
-        //    FeedTabs.Add(newFeed);
-        //}
-        //#endregion
-        //#region DeleteFeedCommand
-        //public ICommand DeleteFeed { get; }
-        //private bool CanDeleteFeedCommandExecute(object p) => p is Feed feed && FeedTabs.Contains(feed);
-        //private void OnDeleteFeedCommandExecuted(object p)
-        //{
-        //    if (!(p is Feed feed)) return;
-        //    FeedTabs.Remove(feed);
-        //}
-        //#endregion
-
-        //#endregion
+        #endregion
     }
 }
