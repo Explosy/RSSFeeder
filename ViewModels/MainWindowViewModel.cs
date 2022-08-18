@@ -16,12 +16,13 @@ namespace RSSFeeder.ViewModels
         private readonly FeedsModel _FeedsModel;
         private Timer timerForRefresh;
         public ReadOnlyObservableCollection<Feed> FeedTabs => _FeedsModel.FeedTabs;
+        public ObservableCollection<Feed> FiltredCollection => _FeedsModel.FiltredCollection; //
 
         public MainWindowViewModel()
         {
             _FeedsModel = FeedsModel.getInstance();
             _FeedsModel.PropertyChanged += (s, e) => { RaisePropertyChanged(e.PropertyName); };
-            
+             
             #region Timer settings
             timerForRefresh = new Timer();
             //timerForRefresh.AutoReset = true;

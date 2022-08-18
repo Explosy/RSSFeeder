@@ -15,6 +15,7 @@ namespace RSSFeeder.Models
         private DataService dataService;
         
         private ObservableCollection<Feed> _FeedTabs = new ObservableCollection<Feed>();
+        public readonly ObservableCollection<Feed> FiltredCollection; //
         public readonly ReadOnlyObservableCollection<Feed> FeedTabs;
 
         #region Singleton of FeedsModel
@@ -22,6 +23,7 @@ namespace RSSFeeder.Models
         private FeedsModel()
         {
             dataService = new DataService();
+            FiltredCollection = new ObservableCollection<Feed>(_FeedTabs.Where(item => item.Visible)); //
             FeedTabs = new ReadOnlyObservableCollection<Feed>(_FeedTabs);
 
             if (App.IsDesignMode)
