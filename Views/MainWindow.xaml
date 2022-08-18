@@ -38,7 +38,7 @@
                 <sv:CommandBinding RoutedCommand="{x:Static ApplicationCommands.Open}"
                            RelayCommand="{Binding OpenInWebCommand}"/>
             </sv:ContextHolder.Commands>
-            <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding FiltredCollection}">
+            <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding FeedTabs}">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}" />
