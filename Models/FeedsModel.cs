@@ -2,7 +2,6 @@
 using RSSFeeder.Services;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Timers;
 
 namespace RSSFeeder.Models
