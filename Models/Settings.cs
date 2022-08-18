@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RSSFeeder.Models
 {
-    internal static class Settings
+    public static class Settings
     {
-        internal static List<string> UserURLs = new List<string>();
-        internal static string DefaultUrl  = "";
-        internal static uint UpdateTime = 60;
+        public static List<string> UserURLs = new List<string>();
+        public static string DefaultUrl  = "";
+        public static uint UpdateTime = 60;
 
         public static void Load()
         {
-            UserURLs = AppSettings.Default.UserURLs;
+            if (AppSettings.Default.UserURLs != null) UserURLs = AppSettings.Default.UserURLs;
             DefaultUrl = AppSettings.Default.DefaultURL;
             UpdateTime = AppSettings.Default.UpdateTime;
         }

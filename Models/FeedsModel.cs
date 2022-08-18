@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using RSSFeeder.Services;
 using System;
+
 using System.Collections.ObjectModel;
 using System.Timers;
 
@@ -25,7 +26,7 @@ namespace RSSFeeder.Models
                 var newFeed = dataService.GetFeedByUrl(@"https://habr.com/rss/interesting/");
                 _FeedTabs.Add(newFeed);
             }
-            else if (Settings.UserURLs.Count != 0)
+            else if (Settings.UserURLs.Count!=0)
             {
                 LoadData();
             }
