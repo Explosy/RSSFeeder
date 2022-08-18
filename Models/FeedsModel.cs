@@ -2,6 +2,7 @@
 using RSSFeeder.Services;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Timers;
 
 namespace RSSFeeder.Models
@@ -13,7 +14,6 @@ namespace RSSFeeder.Models
         private ObservableCollection<Feed> _FeedTabs = new ObservableCollection<Feed>();
         public readonly ReadOnlyObservableCollection<Feed> FeedTabs;
         
-
         #region Singleton of FeedsModel
         private static FeedsModel instance;
         private FeedsModel()
@@ -28,14 +28,13 @@ namespace RSSFeeder.Models
             }
             else if (Settings.UserURLs.Count != 0)
             {
-                _RefreshData();
+                LoadData();
             }
             else
             {
                 Feed newFeed = dataService.GetFeedByUrl(Settings.DefaultUrl);
                 _FeedTabs.Add(newFeed);
-            }
-            
+            }  
         }
         public static FeedsModel getInstance()
         {
@@ -67,21 +66,27 @@ namespace RSSFeeder.Models
         }
         public void RefreshData(object sender, ElapsedEventArgs e)
         {
-            _RefreshData();
-            RaisePropertyChanged("FiltredFeedTabs");
-        }
-        private void _RefreshData()
-        {
             App.Current.Dispatcher.Invoke((Action)delegate
             {
-                _FeedTabs.Clear();
+                int index = 0;
                 foreach (var url in Settings.UserURLs)
                 {
-                    if (url is null) continue;
-                    Feed newFeed = dataService.GetFeedByUrl(url);
-                    _FeedTabs.Add(newFeed);
+                    var visible = _FeedTabs[index].Visible;
+                    _FeedTabs[index] = dataService.GetFeedByUrl(url);
+                    _FeedTabs[index].Visible = visible;
+                    index++;
                 }
             });
+            RaisePropertyChanged("FiltredFeedTabs");
+        }
+        private void LoadData()
+        {
+            foreach (var url in Settings.UserURLs)
+            {
+                if (url is null) continue;
+                Feed newFeed = dataService.GetFeedByUrl(url);
+                _FeedTabs.Add(newFeed);
+            }
         }
         #endregion
     }

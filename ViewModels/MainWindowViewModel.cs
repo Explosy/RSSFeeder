@@ -1,14 +1,10 @@
 ﻿using Prism.Mvvm;
 using RSSFeeder.Models;
-using RSSFeeder.Services;
 using RSSFeeder.Views;
-using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Timers;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace RSSFeeder.ViewModels
@@ -26,7 +22,7 @@ namespace RSSFeeder.ViewModels
             }
         }
 
-        public MainWindowViewModel()
+    public MainWindowViewModel()
         {
             _FeedsModel = FeedsModel.getInstance();
             _FeedsModel.PropertyChanged += (s, e) => { RaisePropertyChanged(e.PropertyName); };

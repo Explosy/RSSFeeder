@@ -1,9 +1,6 @@
 ﻿using Prism.Mvvm;
 using RSSFeeder.Models;
-
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace RSSFeeder.ViewModels
@@ -16,11 +13,6 @@ namespace RSSFeeder.ViewModels
         {
             get => Settings.DefaultUrl;
             set => SetProperty(ref Settings.DefaultUrl, value);
-        }
-        public List<string> UserURLs
-        {
-            get => Settings.UserURLs;
-            set => SetProperty(ref Settings.UserURLs, value);
         }
         public uint UpdateTime
         {
@@ -48,7 +40,6 @@ namespace RSSFeeder.ViewModels
             #endregion
 
         }
-
 
         #region Commands
 
