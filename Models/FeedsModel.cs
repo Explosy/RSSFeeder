@@ -1,11 +1,7 @@
 ﻿using Prism.Mvvm;
 using RSSFeeder.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Timers;
 
 namespace RSSFeeder.Models
@@ -15,15 +11,14 @@ namespace RSSFeeder.Models
         private DataService dataService;
         
         private ObservableCollection<Feed> _FeedTabs = new ObservableCollection<Feed>();
-        public readonly ObservableCollection<Feed> FiltredCollection; //
         public readonly ReadOnlyObservableCollection<Feed> FeedTabs;
+        
 
         #region Singleton of FeedsModel
         private static FeedsModel instance;
         private FeedsModel()
         {
             dataService = new DataService();
-            FiltredCollection = new ObservableCollection<Feed>(_FeedTabs.Where(item => item.Visible)); //
             FeedTabs = new ReadOnlyObservableCollection<Feed>(_FeedTabs);
 
             if (App.IsDesignMode)
@@ -56,15 +51,24 @@ namespace RSSFeeder.Models
             var newFeed = dataService.GetFeedByUrl(url);
             _FeedTabs.Add(newFeed);
             Settings.UserURLs.Add(url);
+            RaisePropertyChanged("FiltredFeedTabs");
         }
         public void RemoveFeed (Feed feed)
         {
             _FeedTabs.Remove(feed);
             Settings.UserURLs.Remove(feed.Link);
+            RaisePropertyChanged("FiltredFeedTabs");
+        }
+        public void ChangeVisibleFeed (Feed feed)
+        {
+            var index = _FeedTabs.IndexOf(feed);
+            _FeedTabs[index].Visible = !_FeedTabs[index].Visible;
+            RaisePropertyChanged("FiltredFeedTabs");
         }
         public void RefreshData(object sender, ElapsedEventArgs e)
         {
             _RefreshData();
+            RaisePropertyChanged("FiltredFeedTabs");
         }
         private void _RefreshData()
         {
@@ -80,6 +84,5 @@ namespace RSSFeeder.Models
             });
         }
         #endregion
-
     }
 }

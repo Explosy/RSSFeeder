@@ -3,6 +3,7 @@ using RSSFeeder.Models;
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace RSSFeeder.ViewModels
@@ -71,11 +72,11 @@ namespace RSSFeeder.ViewModels
         #endregion
         #region ChangeVisibleFeedCommand
         public ICommand ChangeVisibleFeedCommand { get; }
-        private bool CanChangeVisibleFeedCommandExecute(object p) => true;
+        private bool CanChangeVisibleFeedCommandExecute(object p) => p is Feed feed && FeedTabs.Contains(feed);
         private void OnChangeVisibleFeedCommandExecuted(object p)
         {
             if (!(p is Feed feed)) return;
-            feed.Visible = !feed.Visible;
+            _FeedsModel.ChangeVisibleFeed(feed);
         }
         #endregion
 

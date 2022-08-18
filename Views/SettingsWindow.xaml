@@ -6,6 +6,7 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:RSSFeeder.ViewModels"
         xmlns:md="clr-namespace:RSSFeeder.Models"
+        xmlns:sv="clr-namespace:RSSFeeder.Services"
         xmlns:l="clr-namespace:RSSFeeder"
         mc:Ignorable="d"
         Title="" Height="300" Width="410" ResizeMode="NoResize"
@@ -28,13 +29,13 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <fa:ImageAwesome Height="10" Icon="Solid_Eye" Margin="0,0,5,0" Foreground="Black"/>
                                 <TextBlock x:Name="URL" Text="{Binding Title}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </DockPanel>
+
             <DockPanel Grid.Column="1">
                 <StackPanel DockPanel.Dock="Top">
                     <TextBlock Text="Default Feed" TextAlignment="Center" Style="{StaticResource Description}"/>
@@ -46,9 +47,9 @@
                     <TextBox x:Name="AddFeedBox"/>
                 </StackPanel>
                 <UniformGrid DockPanel.Dock="Bottom" Rows="1" VerticalAlignment="Bottom"  Height="25">
-                    <Button Content="Add Feed" Command="{Binding CreateNewFeedCommand}" CommandParameter="{Binding ElementName=AddFeedBox, Path=Text}" Margin="0,0,0,5" Style="{StaticResource Default}"/>
-                    <Button Content="Delete Feed" Command="{Binding DeleteFeedCommand}" CommandParameter="{Binding SelectedURL}" Margin="3,0,0,5" Style="{StaticResource Default}"/>
-                    <Button Content="Visible?" Command="{Binding ChangeVisibleFeedCommand}" CommandParameter="{Binding SelectedURL}" Margin="3,0,0,5" Style="{StaticResource Default}"/>
+                    <Button Content="Add Feed" Command="{Binding CreateNewFeedCommand}" CommandParameter="{Binding ElementName=AddFeedBox, Path=Text}" Margin="0,0,5,5" Style="{StaticResource Default}"/>
+                    <Button Content="Delete Feed" Command="{Binding DeleteFeedCommand}" CommandParameter="{Binding SelectedURL}" Margin="0,0,5,5" Style="{StaticResource Default}"/>
+                    <Button Content="Visible" Command="{Binding ChangeVisibleFeedCommand}" CommandParameter="{Binding SelectedURL}" Margin="5,0,0,5" Style="{StaticResource Default}"/>
                 </UniformGrid>
             </DockPanel>
         </Grid>

@@ -8,7 +8,6 @@
         xmlns:md="clr-namespace:RSSFeeder.Models"
         xmlns:vm="clr-namespace:RSSFeeder.ViewModels"
         xmlns:sv="clr-namespace:RSSFeeder.Services"
-        x:Name="mainWindow"
         Height="550" Width="900" ResizeMode="NoResize"
         Style="{StaticResource DefaultStyle}">
     <Window.DataContext>
@@ -33,12 +32,12 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
+        
         <sv:ContextHolder>
             <sv:ContextHolder.Commands>
-                <sv:CommandBinding RoutedCommand="{x:Static ApplicationCommands.Open}"
-                           RelayCommand="{Binding OpenInWebCommand}"/>
+                <sv:CommandBinding RoutedCommand="{x:Static ApplicationCommands.Open}" RelayCommand="{Binding OpenInWebCommand}" />
             </sv:ContextHolder.Commands>
-            <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding FeedTabs}">
+            <TabControl Background="{x:Null}" Padding="5,5,5,5" ItemsSource="{Binding FiltredFeedTabs}">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}" />

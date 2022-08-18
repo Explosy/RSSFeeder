@@ -4,9 +4,11 @@ using RSSFeeder.Services;
 using RSSFeeder.Views;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Timers;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace RSSFeeder.ViewModels
@@ -16,19 +18,25 @@ namespace RSSFeeder.ViewModels
         private readonly FeedsModel _FeedsModel;
         private Timer timerForRefresh;
         public ReadOnlyObservableCollection<Feed> FeedTabs => _FeedsModel.FeedTabs;
-        public ObservableCollection<Feed> FiltredCollection => _FeedsModel.FiltredCollection; //
+        public ReadOnlyObservableCollection<Feed> FiltredFeedTabs
+        {
+            get
+            {
+                return new ReadOnlyObservableCollection<Feed>(new ObservableCollection<Feed>(_FeedsModel.FeedTabs.Where(i => i.Visible)));
+            }
+        }
 
         public MainWindowViewModel()
         {
             _FeedsModel = FeedsModel.getInstance();
             _FeedsModel.PropertyChanged += (s, e) => { RaisePropertyChanged(e.PropertyName); };
-             
+            
             #region Timer settings
             timerForRefresh = new Timer();
-            //timerForRefresh.AutoReset = true;
-            //timerForRefresh.Interval = Settings.UpdateTime * 1000;
-            //timerForRefresh.Elapsed += RefreshData;
-            //timerForRefresh.Enabled = true;
+            timerForRefresh.AutoReset = true;
+            timerForRefresh.Interval = Settings.UpdateTime * 1000;
+            timerForRefresh.Elapsed += _FeedsModel.RefreshData;
+            timerForRefresh.Enabled = true;
             #endregion
 
             #region Commands
@@ -36,6 +44,8 @@ namespace RSSFeeder.ViewModels
             OpenInWebCommand = new ActionCommand(OnOpenInWebCommandExecuted, CanOpenInWebCommandExecuted);
             #endregion
         }
+
+
 
         #region Commands
         #region OpenSettingsWindowCommand
